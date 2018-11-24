@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BoardComponent } from './board/board.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mbta-app';
+  board: BoardComponent;
+  title = 'MBTA - North/South Boarding';
 }
