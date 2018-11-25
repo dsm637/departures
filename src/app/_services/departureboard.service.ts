@@ -5,6 +5,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 export type Station = 'place-north' | 'place-sstat';
+export type Direction = '0' | '1';
+
+interface PredictionResponse {
+    data: any[];
+    included: any[];
+}
 
 @Injectable()
 export class DepartureboardService {
@@ -12,30 +18,49 @@ export class DepartureboardService {
 
     constructor(private http: HttpClient) { }
 
-    getDepartures(station: Station, isOutBound: boolean, numberOfRecords: number): Observable<DepartureInfo[]> {
+    getDepartures(station: Station, direction: Direction, numberOfRecords: number): Observable<DepartureInfo[]> {
         let params = new HttpParams();
         params = params.append('filter[stop]', station);
         params = params.append('include', 'route,stop');
         params = params.append('filter[route_type]', '2');
-        params = params.append('page[limit]', '10');
-        params = params.append('sort', 'departure_time');
-        params = params.append('filter[direction_id]', isOutBound ? '0' : '1');
+        params = params.append('page[limit]', numberOfRecords.toString());
+        if (direction === '0') {
+            params = params.append('sort', 'departure_time');
+        } else {
+            params = params.append('sort', 'arrival_time');
+        }
+        params = params.append('filter[direction_id]', direction);
 
         return this.http.get(`${ this.baseUrl }predictions`, { observe: 'response', params })
             .pipe(
                 map(response => {
+                    const p: PredictionResponse = <PredictionResponse>response.body;
+
                     console.dir(response);
 
-                    return [
-                        { departureTime: new Date(), destination: 'Portland', trainNumber: 697, status: 'ON TIME', },
-                        { departureTime: new Date(), destination: 'Newburyport', trainNumber: 2169, status: 'ON TIME', },
-                        { departureTime: new Date(), destination: 'Lowell', trainNumber: 697, status: 'ON TIME', },
-                        { departureTime: new Date(), destination: 'Fitchurg', trainNumber: 2413, status: 'ON TIME', },
-                        { departureTime: new Date(), destination: 'Rockport', trainNumber: 2121, status: 'ON TIME', },
-                    ];
+                    // preparing routes info
+                    const routeNames = new Map<string, string>();
+                    for (const i of p.included) {
+                        routeNames[i.id] = i.attributes.long_name;
+                    }
+
+                    const result: DepartureInfo[] = [];
+                    for (const d of p.data) {
+                        const r: DepartureInfo = {
+                            time: direction === '0' ?
+                                d.attributes.departure_time :
+                                d.attributes.arrival_time,
+                            destination: routeNames[d.relationships.route.data.id],
+                            status: d.attributes.status,
+                            // TODO: add train number
+                            trainNumber: -1,
+                        };
+
+                        result.push(r);
+                    }
+
+                    return result;
                 })
             );
-
-
     }
 }

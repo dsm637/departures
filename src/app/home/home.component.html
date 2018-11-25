@@ -1,33 +1,46 @@
 <div class="container mt-4">
 
-  
+    <div class="row mb-2">
+        <div class="btn-group mr-2">
+          <button class="btn btn-success" [(ngModel)]="direction" btnRadio="0" (click)="loadDepartures()">
+            Outbound
+          </button>
+          <button class="btn btn-success" [(ngModel)]="direction" btnRadio="1" (click)="loadDepartures()">
+            Inbound
+          </button>
+        </div>
+
+        <div class="btn-group mr-2">
+          <button class="btn btn-info" [(ngModel)]="station" btnRadio="place-sstat" (click)="loadDepartures()">
+            SOUTH STATION
+          </button>
+          <button class="btn btn-info" [(ngModel)]="station" btnRadio="place-north" (click)="loadDepartures()">
+            NORTH STATION
+          </button>
+        </div>
+      </div>
+      
   <div class="row">
-    <div class="btn-group">
-      <button class="btn btn-primary" [(ngModel)]="station" btnRadio="place-sstat" (click)="loadDepartures()">
-        SOUTH STATION
-      </button>
-      <button class="btn btn-primary" [(ngModel)]="station" btnRadio="place-north" (click)="loadDepartures()">
-        NORTH STATION
-      </button>
-    </div>
+    <div>Last updated: {{ lastUpdated | amTimeAgo }} ({{ lastUpdated | amDateFormat:'llll' }}) <button class="btn btn-link" (click)="loadDepartures()">Refresh</button></div>
+    <table class="table table-dark table-hover depBoard">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{ direction === '0' ? 'DEPARTURE' : 'ARRIVAL' }}</th>
+          <th scope="col">DESTINATION</th>
+          <!-- <th scope="col">TRAIN#</th> -->
+          <th scope="col">STATUS</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let d of departures; index as i">
+        <td>{{ i + 1 }}</td>
+        <td *ngIf="d.time != null">{{ d.time | amTimeAgo:true }} ({{ d.time | amDateFormat:'LT' }})</td>
+        <td *ngIf="d.time == null">N/A</td>
+        <td>{{ d.destination }}</td>
+        <!-- <td>{{ d.trainNumber }}</td> -->
+        <td>{{ d.status }}</td>
+      </tr>
+    </table>
   </div>
-  
-  <div class="row">
-    {{ station }} selected!
-  </div>
-  <table>
-    <tr>
-      <th>TIME</th>
-      <th>DESTINATION</th>
-      <th>TRAIN#</th>
-      <th>STATUS</th>
-    </tr>
-    <tr *ngFor="let d of departures">
-      <td>{{ d.departureTime | amTimeAgo:true }}</td>
-      <td>{{ d.destination }}</td>
-      <td>{{ d.trainNumber }}</td>
-      <td>{{ d.status }}</td>
-    </tr>
-  </table>
-  
+
 </div>

@@ -1,5 +1,5 @@
 export interface DepartureInfo {
-    departureTime: Date;
+    time: Date;
     destination: string;
     trainNumber: number;
     status: string;

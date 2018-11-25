@@ -1,0 +1,162 @@
+{
+  "data": [
+    {
+      "attributes": {
+        "arrival_time": null,
+        "departure_time": "2018-11-24T23:30:00-05:00",
+        "direction_id": 0,
+        "schedule_relationship": null,
+        "status": "On time",
+        "stop_sequence": 1
+      },
+      "id": "prediction-CR-Saturday-Fall-18-1413-North Station-1",
+      "relationships": {
+        "route": { "data": { "id": "CR-Fitchburg", "type": "route" } },
+        "stop": { "data": { "id": "North Station", "type": "stop" } },
+        "trip": { "data": { "id": "CR-Saturday-Fall-18-1413", "type": "trip" } }
+      },
+      "type": "prediction"
+    },
+    {
+      "attributes": {
+        "arrival_time": null,
+        "departure_time": "2018-11-24T23:30:00-05:00",
+        "direction_id": 0,
+        "schedule_relationship": null,
+        "status": "On time",
+        "stop_sequence": 1
+      },
+      "id": "prediction-CR-Saturday-Fall-18-1315-North Station-1",
+      "relationships": {
+        "route": { "data": { "id": "CR-Lowell", "type": "route" } },
+        "stop": { "data": { "id": "North Station", "type": "stop" } },
+        "trip": { "data": { "id": "CR-Saturday-Fall-18-1315", "type": "trip" } }
+      },
+      "type": "prediction"
+    },
+    {
+      "attributes": {
+        "arrival_time": null,
+        "departure_time": "2018-11-24T23:30:00-05:00",
+        "direction_id": 0,
+        "schedule_relationship": null,
+        "status": "On time",
+        "stop_sequence": 1
+      },
+      "id": "prediction-CR-Saturday-Fall-18-1211-North Station-1",
+      "relationships": {
+        "route": { "data": { "id": "CR-Haverhill", "type": "route" } },
+        "stop": { "data": { "id": "North Station", "type": "stop" } },
+        "trip": { "data": { "id": "CR-Saturday-Fall-18-1211", "type": "trip" } }
+      },
+      "type": "prediction"
+    },
+    {
+      "attributes": {
+        "arrival_time": null,
+        "departure_time": "2018-11-24T23:30:00-05:00",
+        "direction_id": 0,
+        "schedule_relationship": null,
+        "status": "On time",
+        "stop_sequence": 1
+      },
+      "id": "prediction-CR-Saturday-Fall-18-1113-North Station-1",
+      "relationships": {
+        "route": { "data": { "id": "CR-Newburyport", "type": "route" } },
+        "stop": { "data": { "id": "North Station", "type": "stop" } },
+        "trip": { "data": { "id": "CR-Saturday-Fall-18-1113", "type": "trip" } }
+      },
+      "type": "prediction"
+    }
+  ],
+  "included": [
+    {
+      "attributes": {
+        "color": "80276C",
+        "description": "Commuter Rail",
+        "direction_names": ["Outbound", "Inbound"],
+        "long_name": "Fitchburg Line",
+        "short_name": "",
+        "sort_order": 52,
+        "text_color": "FFFFFF",
+        "type": 2
+      },
+      "id": "CR-Fitchburg",
+      "links": { "self": "/routes/CR-Fitchburg" },
+      "type": "route"
+    },
+    {
+      "attributes": {
+        "color": "80276C",
+        "description": "Commuter Rail",
+        "direction_names": ["Outbound", "Inbound"],
+        "long_name": "Haverhill Line",
+        "short_name": "",
+        "sort_order": 56,
+        "text_color": "FFFFFF",
+        "type": 2
+      },
+      "id": "CR-Haverhill",
+      "links": { "self": "/routes/CR-Haverhill" },
+      "type": "route"
+    },
+    {
+      "attributes": {
+        "color": "80276C",
+        "description": "Commuter Rail",
+        "direction_names": ["Outbound", "Inbound"],
+        "long_name": "Lowell Line",
+        "short_name": "",
+        "sort_order": 58,
+        "text_color": "FFFFFF",
+        "type": 2
+      },
+      "id": "CR-Lowell",
+      "links": { "self": "/routes/CR-Lowell" },
+      "type": "route"
+    },
+    {
+      "attributes": {
+        "color": "80276C",
+        "description": "Commuter Rail",
+        "direction_names": ["Outbound", "Inbound"],
+        "long_name": "Newburyport/Rockport Line",
+        "short_name": "",
+        "sort_order": 61,
+        "text_color": "FFFFFF",
+        "type": 2
+      },
+      "id": "CR-Newburyport",
+      "links": { "self": "/routes/CR-Newburyport" },
+      "type": "route"
+    },
+    {
+      "attributes": {
+        "address": null,
+        "description": "North Station - Commuter Rail",
+        "latitude": 42.366417,
+        "location_type": 0,
+        "longitude": -71.062326,
+        "name": "North Station",
+        "platform_code": null,
+        "platform_name": "Commuter Rail",
+        "wheelchair_boarding": 1
+      },
+      "id": "North Station",
+      "links": { "self": "/stops/North%20Station" },
+      "relationships": {
+        "child_stops": {},
+        "facilities": {
+          "links": { "related": "/facilities/?filter[stop]=North%20Station" }
+        },
+        "parent_station": { "data": { "id": "place-north", "type": "stop" } }
+      },
+      "type": "stop"
+    }
+  ],
+  "jsonapi": { "version": "1.0" },
+  "links": {
+    "first": "https://api-v3.mbta.com/predictions?filter[direction_id]=0&filter[route_type]=2&filter[stop]=place-north&include=route%2Cstop&page[limit]=10&page[offset]=0&sort=departure_time",
+    "last": "https://api-v3.mbta.com/predictions?filter[direction_id]=0&filter[route_type]=2&filter[stop]=place-north&include=route%2Cstop&page[limit]=10&page[offset]=0&sort=departure_time"
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartureboardService, Station } from '../_services/departureboard.service';
+import { DepartureboardService, Station, Direction } from '../_services/departureboard.service';
 import { DepartureInfo } from '../_models/departureInfo';
 
 @Component({
@@ -9,7 +9,9 @@ import { DepartureInfo } from '../_models/departureInfo';
 })
 export class HomeComponent implements OnInit {
   departures: DepartureInfo[];
-  station: Station = 'place-north';
+  station: Station = 'place-sstat';
+  direction: Direction = '0';
+  lastUpdated: Date;
 
   constructor(private departureService: DepartureboardService) { }
 
@@ -18,12 +20,14 @@ export class HomeComponent implements OnInit {
   }
 
   loadDepartures() {
-    console.log(this.station);
-    this.departureService.getDepartures(this.station, true, 10).subscribe((res: DepartureInfo[]) => {
+    console.log(`${ this.station } to ${ this.direction } selected`);
+    this.departureService.getDepartures(this.station, this.direction, 10).subscribe((res: DepartureInfo[]) => {
       this.departures = res;
+      this.lastUpdated = new Date();
     }, error => {
       // TODO: process error
       console.error(error);
+      this.lastUpdated = new Date();
     });
   }
 
